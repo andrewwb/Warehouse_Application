@@ -1,0 +1,13 @@
+﻿.nav-logo{
+    /*border-bottom: 1px solid white;*/
+    margin-bottom: 0;
+}
+
+.nav-buttons{
+    width: 100%;
+    border-radius: 0;
+}
+
+.nav-bar{
+    box-shadow: 5px 0 15px 0 rgba(0,0,0,0.5);
+}

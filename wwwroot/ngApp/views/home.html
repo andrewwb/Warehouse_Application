@@ -1,0 +1,16 @@
+<h2>Home</h2>
+<div>
+    <ul>
+        <li ng-repeat="warehouse in controller.warehouses">{{warehouse.name}}</li>
+    </ul>
+
+    <ul>
+        <li ng-repeat="employee in controller.employees">
+            {{employee.firstName}} {{employee.lastName}}
+        </li>
+    </ul>
+
+    <ul>
+        <li ng-repeat="item in controller.items track by $index">{{item.name}}</li>
+    </ul>
+</div>

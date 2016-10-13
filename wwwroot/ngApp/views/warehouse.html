@@ -1,0 +1,87 @@
+﻿<style>
+    md-list {
+        padding-top: 0;
+    }
+</style>
+<div layout="column">
+    <div layout="row" layout-align="center center">
+        <md-list flex="85" class="item-lists" ng-show="!controller.checking">
+            <md-toolbar class="md-hue-1" layout="row" layout-align="start center">
+                <span style="padding: 0 16px 0 16px">{{controller.warehouse.name}}</span>
+            </md-toolbar>
+            <md-list-item layout="row" layout-align="center center">
+                <md-input-container>
+                    <label>Item Name</label>
+                    <input ng-model="item.name" />
+                </md-input-container>
+                <md-input-container>
+                    <label>Quantity</label>
+                    <input ng-model="item.warehouseQty" />
+                </md-input-container>
+                <md-input-container>
+                    <label>Image URL</label>
+                    <input ng-model="item.imageUrl" />
+                </md-input-container>
+                <md-button class="md-raised md-primary" ng-click="controller.postNewItem(item)">
+                    Add
+                </md-button>
+            </md-list-item>
+            <md-list-item class="list-item" ng-repeat="item in controller.warehouse.items track by $index">
+                - {{item.name}} | <span style="color: #E53935">{{item.warehouseQty}}</span> in stock.
+            </md-list-item>
+        </md-list>
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <md-list flex="85" class="item-lists" ng-show="controller.checking">
+            <md-toolbar class="md-hue-1" layout="row" layout-align="start center">
+                <span style="padding: 0 16px 0 16px">Checkout from {{controller.warehouse.name}}</span>
+            </md-toolbar>
+            <md-list-item>
+                <md-input-container>
+                    <label>Employee</label>
+                    <md-select ng-model="checkout.employeeId">
+                        <md-option ng-repeat="employee in controller.employees" ng-value="employee.id">
+                            {{employee.firstName}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </md-list-item>
+            <md-list-item>
+                <md-input-container>
+                    <label>Item</label>
+                    <md-select ng-model="checkout.itemId">
+                        <md-option ng-repeat="item in controller.items" ng-value="item.id">
+                            {{item.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </md-list-item>
+            <md-list-item>
+                <md-input-container>
+                    <label>Quantity</label>
+                    <input type="number" ng-model="checkout.quantity" />
+                </md-input-container>
+            </md-list-item>
+            <md-list-item class="md-2-line" layout="column">
+                <p>{{controller.checkoutStatus}}</p>
+                <md-button class="md-raised md-primary" ng-click="controller.checkoutItem(checkout)" ng-show="controller.checkoutMenu">
+                    Checkout
+                </md-button>
+                <md-button class="md-raised md-primary" ng-click="controller.checkInItem(checkout)" ng-show="controller.checkInMenu">
+                    Check in
+                </md-button>
+            </md-list-item>
+        </md-list>
+    </div>
+    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <div layout="row" flex-offset="10">
+        <md-button class="md-raised md-primary" ng-show="!controller.checkoutMenu" ng-click="controller.checkoutMenu = true; controller.checking = true;">
+            Checkout Items
+        </md-button>
+        <md-button class="md-raised md-primary" ng-show="!controller.checkInMenu" ng-click="controller.checkInMenu = true; controller.checking = true;">
+            Check in Items
+        </md-button>
+        <md-button class="md-raised md-primary" ng-show="controller.checkoutMenu" ng-click="controller.checkoutMenu = false; controller.checkInMenu = false; controller.checking = false;">
+            Items List
+        </md-button>
+    </div>
+</div>
